@@ -152,7 +152,6 @@ class NorbEnv(gym.Env):
 
     def reset(self):
         # without this cast, numpy refused for some reason
-        np.random.seed(int(self._seed))
         self.current_index = np.random.randint(self.max_index)
         self.target_index = np.random.randint(self.max_index)
         ob = np.stack((self.item[self.current_index].image_lt,
