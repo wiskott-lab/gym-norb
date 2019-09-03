@@ -148,11 +148,12 @@ class NorbEnv(gym.Env):
             over, _ = self._is_close()
             episode_over = over
 
+        print('step, current index is: {}'.format(self.current_index))
+
         return ob, reward, episode_over, {}
 
     def reset(self):
         # without this cast, numpy refused for some reason
-        np.random.seed(int(self._seed))
         self.current_index = np.random.randint(self.max_index)
         self.target_index = np.random.randint(self.max_index)
         ob = np.stack((self.item[self.current_index].image_lt,
@@ -162,6 +163,7 @@ class NorbEnv(gym.Env):
         ##ob = ob[np.newaxis, np.newaxis, :]
         self._seed = np.random.rand()
         self.ep_time_left = self.max_ep_time
+        print('reset occured, current pos: {}\ntarget pos: {}'.format(self.current_index, self.target_index))
         return ob
 
     def render(self, mode='human', close=False):
