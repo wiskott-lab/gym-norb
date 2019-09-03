@@ -148,10 +148,10 @@ class NorbEnv(gym.Env):
             over, _ = self._is_close()
             episode_over = over
 
+
         return ob, reward, episode_over, {}
 
     def reset(self):
-        # without this cast, numpy refused for some reason
         self.current_index = np.random.randint(self.max_index)
         self.target_index = np.random.randint(self.max_index)
         ob = np.stack((self.item[self.current_index].image_lt,
